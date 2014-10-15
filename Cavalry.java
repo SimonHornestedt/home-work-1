@@ -1,4 +1,5 @@
 
-public class Cavalry {
+public class Cavalry extends Army implements Comparable{
+    
     
 }

@@ -1,4 +1,3 @@
-public Subclass1{
+public class Musketeer extends Army implements Comparable{
 
-
-{
+}
