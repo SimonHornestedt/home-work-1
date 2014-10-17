@@ -1,4 +1,13 @@
-public class Army{
+public abstract class Unit{
+    
+    
+    public static int nbrOfUnits;
+    
+    
+ 
+    
+   
+    
 
 
 }
