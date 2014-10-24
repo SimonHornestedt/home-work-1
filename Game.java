@@ -3,31 +3,48 @@ import java.util.ArrayList;
 
 public class Game{
 
-    public ArrayList <Unit> playerArmy, npc1Army;
-    
+    private ArrayList <Unit> army1, army2, army3, army4;
+    private Boolean npcRound;
     
     public Game(){
         this.createBoard();
-        this.playerArmy = new ArrayList<>();
-        this.npc1Army = new ArrayList<>();
-        
+        this.army1 = new ArrayList<>();
+        this.army2 = new ArrayList<>();
+        this.army3 = new ArrayList<>();
+        this.army4 = new ArrayList<>();
     }
     
-    public void addPlayerMusketeer(){
+    
+    public void addMusketeer(){
+        
         Unit u = new Musketeer();
-        playerArmy.add(u);
+        army1.add(u);
         
         
     }
-    public void addPlayerCavalry(){
+    public void addCavalry(int i){
         Unit u = new Cavalry();
-        playerArmy.add(u);
+        switch(i){
+            case 1:
+                army1.add(u);
+            break;
+            case 2:
+                army2.add(u);
+            break;
+            case 3:
+                army3.add(u);
+            break;
+            default:
+                army4.add(u);
+            break;
+        }
         
         
     }
-    public void addPlayerPikeman(){
+    public void addPikeman(){
         Unit u = new Pikeman();
-        playerArmy.add(u);
+        
+        army1.add(u);
         
         
     }
