@@ -23,6 +23,10 @@ public class Cavalry extends Unit implements Comparable{
     public int getDef() {
         return defense;
     }
+    @Override
+    public String toString(){
+        return "Cavalry: ";
+    }
 
     
 
