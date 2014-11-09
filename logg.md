@@ -13,6 +13,12 @@ Idag: skrev GUI och det vart nästan klart nästa gång börja placera ut gubbar i a
 Idag: skrivt fördigt knappar för att lägga till enheter i army även fixat färdigt så att jag har rundor. 
 Nästa: Börja skriva kod för själva spelet så att det börjar gå att använda
 
-- 2014.11.05
+- 2014.11.08
 Skrivit klar det mesta av koden för GUI:t. Fixat alla knappar etc. 
 nästa gång. fixa bugg i runGame-loopen som gör så att spelet hänger sig. efter det börja jobba på spel makanismer etc. 
+
+- 2014.11.09 15.20
+Fixat buggen som hände spelet genom att radera den. Fixat de olika rundorna så att rätt knappar är framme och fixat så att man kan lägga till gubbar i armeerna ordentligt. 
+nästa gång: Fixa så att man kan attackera motståndare och sedan fixa till så att man kan vinna och ta över länder.
+Uppdaterat till version 0.6.0. Release kommer att vara 1.0.0
+

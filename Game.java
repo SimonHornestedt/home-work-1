@@ -1,18 +1,14 @@
 
+import java.awt.Color;
 import java.util.ArrayList;
-import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+
 
 public class Game{
 
     private ArrayList <Unit> army1, army2, army3, army4;
     private int playerBank;
-
-    
-    private Boolean npcRound, buyRound, attackRound;
-
-    
     private Boolean npcRules, playerRules;
     private Boolean land1BelongsTo,land2BelongsTo,land3BelongsTo,land4BelongsTo;
     private Boolean land1Selected, land2Selected, land3Selected, land4Selected;
@@ -30,10 +26,8 @@ public class Game{
         this.land4Selected = false;
         this.playerRules = false;
         this.npcRules = false;
-        this.buyRound = true;
-        this.attackRound = false;
-        this.npcRound = false;
-        this.playerBank = 0;
+       
+        this.playerBank = 1000;
         this.army1 = new ArrayList<>();
         this.army2 = new ArrayList<>();
         this.army3 = new ArrayList<>();
@@ -60,104 +54,98 @@ public class Game{
     
     
     public void addMusketeer(int i){
-        
-        Unit u = new Musketeer();
-        
-        switch(i){
-            case 1:
-                army1.add(u);
-            break;
-            case 2:
-                army2.add(u);
-            break;
-            case 3:
-                army3.add(u);
-            break;
-            default:
-                army4.add(u);
-            break;
+        if(hasMoney(150)){
+        Unit u = new Musketeer();        
+            switch(i){
+                case 1:
+                    army1.add(u);
+                break;
+                case 2:
+                    army2.add(u);
+                break;
+                case 3:
+                    army3.add(u);
+                break;
+                default:
+                    army4.add(u);
+                break;
+            } 
+        }else{
+            String msg = "Insufficient founds! \n";
+            String founds = "You only have: " + playerBank;
+            JOptionPane.showMessageDialog(null, msg + founds);
         }
         
         
     }
+    private boolean hasMoney(int i){
+        if(playerBank - i >= 0){
+            playerBank = playerBank - i;
+            return true;
+        }else{
+            return false;
+        }
+    }
     public void addCavalry(int i){
+        if(hasMoney(200)){
         Unit u = new Cavalry();
-        switch(i){
-            case 1:
-                army1.add(u);
-            break;
-            case 2:
-                army2.add(u);
-            break;
-            case 3:
-                army3.add(u);
-            break;
-            default:
-                army4.add(u);
-            break;
+            switch(i){
+                case 1:
+                    army1.add(u);
+                break;
+                case 2:
+                    army2.add(u);
+                break;
+                case 3:
+                    army3.add(u);
+                break;
+                default:
+                    army4.add(u);
+                break;
+            }
+        }else{
+            String msg = "Insufficient founds! \n";
+            String founds = "You only have: " + playerBank;
+            JOptionPane.showMessageDialog(null, msg + founds);
         }
         
         
     }
     public void addPikeman(int i){
-        
-        Unit u = new Pikeman();
-        
-        
-        switch(i){
-            case 1:
-                army1.add(u);
-            break;
-            case 2:
-                army2.add(u);
-            break;
-            case 3:
-                army3.add(u);
-            break;
-            default:
-                army4.add(u);
-            break;
+        if(hasMoney(100)){
+            Unit u = new Pikeman();
+            switch(i){
+                case 1:
+                    army1.add(u);
+                break;
+                case 2:
+                    army2.add(u);
+                break;
+                case 3:
+                    army3.add(u);
+                break;
+                default:
+                    army4.add(u);
+                break;
+            }
+        }else{
+            String msg = "Insufficient founds! \n";
+            String founds = "You only have: " + playerBank;
+            JOptionPane.showMessageDialog(null, msg + founds);
         }
     }
     private void addMoney(){
         for(int i = 0; i > 4; i++){
-            if(getLandBelongsTo(i)){
-                playerBank += 300;
-            }
+            //if(getLandBelongsTo(i)){
+              //  playerBank += 300;
+            //}
         }
     }
-    public void useMoney(int cash){
-        if(playerBank - cash > 0){
-            playerBank = playerBank - cash;
-        }
-        else{
-                String msg = "Insufficient founds! \n";
-                String founds = "You only have: " + playerBank;
-                JOptionPane.showMessageDialog(null, msg + founds);
-        }
+
+    public void runNpcRound(){
+        
     }
-    
-    public void runGame(JPanel land1,JPanel land2,JPanel land3,JPanel land4){
-        do{
-           
-           try{
-            Thread.sleep(1000);
-            }catch(InterruptedException ex){
-                
-            }
-            
-           if(buyRound){
-               
-           }else if(attackRound){
-               
-           }else if(npcRound){
-               addMoney();
-           }
-           
-        }while(this.worldNotConquered());
-    }
-    
-    private boolean worldNotConquered(){
+    private boolean isWorldConquered(){
         if(playerRules || npcRules){
         return false;
         }else return true;
@@ -215,18 +203,63 @@ public class Game{
             break;
         }
     }
-    public Boolean getLandBelongsTo(int i) {
-        
-        if(i == 1){ 
-            return land1BelongsTo;
-        }else if(i == 2){
-            return land2BelongsTo;
-        }else if (i == 3){
-            return land3BelongsTo;
-        }else {
-            return land4BelongsTo;
-        }    
+    /**
+     * 
+     * @param i = det land som skall kontrolleras
+     * @return landets nummer om det är spelaren land
+     */
+    public int getLandBelongsTo(int i) {
+
+        switch(i){
+            case 1:
+                if(land1BelongsTo){
+                    return i;
+                }else{
+                    return 0;
+                }
+            case 2:
+                if(land2BelongsTo){
+                    return i;
+                }else{
+                    return 0;
+                }
+            case 3:
+                if(land3BelongsTo){
+                    return i;
+                }else{
+                    return 0;
+                }
+            default:
+                if(land4BelongsTo){
+                    return i;
+                }else{
+                    return 0;
+                }
+        }       
     }
+    public void attack(int i){
+        
+    }
+    public Color colorLand(){
+        Color c = Color.WHITE;
+        for(int i = 1; i< 5; i++){
+            ArrayList <Integer> temp = new ArrayList<>();
+            temp.add(getLandBelongsTo(i));
+            for(int u : temp){
+                    switch(u){
+                        case 0:
+                            c = Color.CYAN;
+                        break;
+                        
+                        default:
+                            c = Color.WHITE;
+                        break;
+                        }
+            }    
+        }
+        return c;
+    }
+    
     
     public void setLandBelongsTo(Boolean b, int i) {
         switch(i){
@@ -245,63 +278,36 @@ public class Game{
         }
     }
 
-    public Boolean getLand1Selected() {
+    public Boolean isLand1Selected() {
         return land1Selected;
     }
 
-    public Boolean getLand2Selected() {
+    public Boolean isLand2Selected() {
         return land2Selected;
     }
 
-    public Boolean getLand3Selected() {
+    public Boolean isLand3Selected() {
         return land3Selected;
     }
 
-    public Boolean getLand4Selected() {
+    public Boolean isLand4Selected() {
         return land4Selected;
     }
     public int getPlayerBank() {
         return playerBank;
     }
-    public Boolean getNpcRound() {
-        return npcRound;
-    }
+ 
 
-    public void setNpcRound(Boolean b) {
-        this.npcRound = b;
-    }
-
-    public Boolean getBuyRound() {
-        return buyRound;
-    }
-
-    public void setBuyRound(Boolean b) {
-        this.buyRound = b;
-    }
-
-    public Boolean getAttackRound() {
-        return attackRound;
-    }
-
-    public void setAttackRound(Boolean b) {
-        this.attackRound = b;
-    }
-
-    public Boolean getNpcRules() {
+    public Boolean doesNpcRule() {
+        
         return npcRules;
     }
 
-    public void setNpcRules(Boolean b) {
-        this.npcRules = b;
-    }
-
-    public Boolean getPlayerRules() {
+    public Boolean doesPlayerRule() {
         return playerRules;
     }
 
-    public void setPlayerRules(Boolean b ) {
-        this.playerRules = b;
-    }
+    
     
     
 }

@@ -2,6 +2,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -20,7 +21,7 @@ public class MainGUI extends JFrame{
      private Game game;
      private Dimension dimFrame, dimTxf, dimTxa;
      private JPanel land1, land2, land3, land4, optPnl, statPnl;
-     private JLabel lblPlayerBank, lblNbrOfUnits; 
+     private JLabel lblPlayerBank, lblNbrOfUnits, cavPrice, muskPrice, pikePrice; 
      private JTextField txfPlayerBank, txfNbrOfUnit, txfNbrOfUnit2,
              txfNbrOfUnit3, txfNbrOfUnit4;
      private JMenuBar menu;
@@ -39,7 +40,7 @@ public class MainGUI extends JFrame{
          /*
             Standard storlekar i klassen
          */
-         this.dimFrame = new Dimension(1500,500);
+         this.dimFrame = new Dimension(1400,500);
          this.dimTxf = new Dimension(60, 30);
          this.dimTxa = new Dimension(400, 100);
          this.border = BorderFactory.createLineBorder(Color.BLACK);
@@ -59,6 +60,9 @@ public class MainGUI extends JFrame{
          this.optPnl = new JPanel();
          this.statPnl = new JPanel();
          this.lblNbrOfUnits = new JLabel("Units:");
+         this.cavPrice = new JLabel("Cavalry: 200c");
+         this.muskPrice = new JLabel("Musketeer: 150c");
+         this.pikePrice = new JLabel("Pikeman: 100c ");
          this.txaFight = new JTextArea();
          
        
@@ -133,6 +137,10 @@ public class MainGUI extends JFrame{
          this.txaFight.setPreferredSize(dimTxa);
          this.txaFight.setEditable(false);
          this.txaFight.setBorder(border);
+         this.statPnl.add(cavPrice);
+         this.statPnl.add(muskPrice);
+         this.statPnl.add(pikePrice);
+         
          
          
          /*
@@ -183,22 +191,28 @@ public class MainGUI extends JFrame{
          
          
          
+         
+         
          this.addCav.setVisible(false);
-         this.addCav2.setVisible(false);
          this.addMusk.setVisible(false);
-         this.addMusk2.setVisible(false);
          this.addPike.setVisible(false);
+         this.addCav2.setVisible(false);
+         this.addMusk2.setVisible(false);
          this.addPike2.setVisible(false);
          this.addCav3.setVisible(false);
+         this.addMusk3.setVisible(false);   
+         this.addPike3.setVisible(false);
          this.addCav4.setVisible(false);
          this.addMusk4.setVisible(false);
-         this.addMusk3.setVisible(false);
-         this.addPike4.setVisible(false);
-         this.addPike3.setVisible(false);
+         this.addPike4.setVisible(false);        
          this.attack1.setVisible(false);
          this.attack2.setVisible(false);
          this.attack3.setVisible(false);
          this.attack4.setVisible(false);
+         this.landSelected1.setVisible(false);
+         this.landSelected2.setVisible(false);
+         this.landSelected3.setVisible(false);
+         this.landSelected4.setVisible(false);
          
      }
      
@@ -245,21 +259,22 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game = new Game();
-                game.runGame(land1,land2,land3,land4);
-                btnEndBuyRound.setEnabled(true);
+                setBuyRoundButtons();
+                
             }
          });
          
          this.aboutProg.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                String about = "Programmet är en mall för ett GUI\n";
-                String version = "Version: 0.1.0";
+                String about = "Risk, inlämning 2014-11-14 \n";
+                String version = "Version: 0.6.0";
                 JOptionPane.showMessageDialog(null, about + version);
             }
          });
      
      }
+     
      private void initButtonGUI(){
           /*
           * Actionevent för knappar (Cavalry)
@@ -271,7 +286,7 @@ public class MainGUI extends JFrame{
                 game.getArmy(1);
                 
                 txfNbrOfUnit.setText(Integer.toString(game.getArmy(1)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addCav2.addActionListener(new ActionListener(){
@@ -280,7 +295,7 @@ public class MainGUI extends JFrame{
                 game.addCavalry(2);
                 game.getArmy(2);
                 txfNbrOfUnit2.setText(Integer.toString(game.getArmy(2)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addCav3.addActionListener(new ActionListener(){
@@ -289,7 +304,7 @@ public class MainGUI extends JFrame{
                 game.addCavalry(3);
                 game.getArmy(3);
                 txfNbrOfUnit3.setText(Integer.toString(game.getArmy(3)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addCav4.addActionListener(new ActionListener(){
@@ -298,7 +313,7 @@ public class MainGUI extends JFrame{
                 game.addCavalry(4);
                 game.getArmy(4);
                 txfNbrOfUnit4.setText(Integer.toString(game.getArmy(4)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          /*
@@ -310,7 +325,7 @@ public class MainGUI extends JFrame{
                 game.addMusketeer(1);
                 game.getArmy(1);
                 txfNbrOfUnit.setText(Integer.toString(game.getArmy(1)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addMusk2.addActionListener(new ActionListener(){
@@ -319,7 +334,7 @@ public class MainGUI extends JFrame{
                 game.addMusketeer(2);
                 game.getArmy(2);
                 txfNbrOfUnit2.setText(Integer.toString(game.getArmy(2)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addMusk3.addActionListener(new ActionListener(){
@@ -328,7 +343,7 @@ public class MainGUI extends JFrame{
                 game.addMusketeer(3);
                 game.getArmy(3);
                 txfNbrOfUnit3.setText(Integer.toString(game.getArmy(3)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addMusk4.addActionListener(new ActionListener(){
@@ -337,7 +352,7 @@ public class MainGUI extends JFrame{
                 game.addMusketeer(4);
                 game.getArmy(4);
                 txfNbrOfUnit4.setText(Integer.toString(game.getArmy(4)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          /*
@@ -349,7 +364,7 @@ public class MainGUI extends JFrame{
                 game.addPikeman(1);
                 game.getArmy(1);
                 txfNbrOfUnit.setText(Integer.toString(game.getArmy(1)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addPike2.addActionListener(new ActionListener(){
@@ -358,7 +373,7 @@ public class MainGUI extends JFrame{
                 game.addPikeman(2);
                 game.getArmy(2);
                 txfNbrOfUnit2.setText(Integer.toString(game.getArmy(2)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addPike3.addActionListener(new ActionListener(){
@@ -367,7 +382,7 @@ public class MainGUI extends JFrame{
                 game.addPikeman(3);
                 game.getArmy(3);
                 txfNbrOfUnit3.setText(Integer.toString(game.getArmy(3)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addPike4.addActionListener(new ActionListener(){
@@ -376,7 +391,7 @@ public class MainGUI extends JFrame{
                 game.addPikeman(4);
                 game.getArmy(4);
                 txfNbrOfUnit4.setText(Integer.toString(game.getArmy(4)));
-                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          /*
@@ -387,7 +402,7 @@ public class MainGUI extends JFrame{
             public void actionPerformed(ActionEvent e){
                 
                 game.selectLand(1);
-                if(landSelected1.getText() == "Use"){
+                if(landSelected1.getText().equals("Use")){
                     landSelected1.setText("Selected");
                     
                 }else{
@@ -402,7 +417,7 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.selectLand(2);
-                if(landSelected2.getText() == "Use"){
+                if(landSelected2.getText().equals("Use")){
                     landSelected2.setText("Selected");
                 }else{
                     landSelected2.setText("Use");
@@ -416,7 +431,7 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.selectLand(3);
-                if(landSelected3.getText() == "Use"){
+                if(landSelected3.getText().equals("Use")){
                     landSelected3.setText("Selected");
                     
                 }else{
@@ -431,9 +446,8 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.selectLand(4);
-                if(landSelected4.getText() == "Use"){
+                if(landSelected4.getText().equals("Use")){
                     landSelected4.setText("Selected");
-                    
                 }else{
                     landSelected4.setText("Use");
                 }
@@ -445,25 +459,25 @@ public class MainGUI extends JFrame{
          this.attack1.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                //game.attack(1);
+                game.attack(1);
             }
          });
          this.attack2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                //game.attack(2);
+                game.attack(2);
             }
          });
          this.attack3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                //game.attack(3);
+                game.attack(3);
             }
          });
          this.attack4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                //game.attack(4);
+                game.attack(4);
             }
          });
          this.btnEndBuyRound.addActionListener(new ActionListener(){
@@ -471,19 +485,100 @@ public class MainGUI extends JFrame{
             public void actionPerformed(ActionEvent e){
                 btnEndBuyRound.setEnabled(false);
                 btnEndAttackRound.setEnabled(true);
-                game.setBuyRound(false);
-                game.setAttackRound(true);
+                setAttackRoundButtons();
+                
+                
             }
          });
          this.btnEndAttackRound.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                btnEndAttackRound.setEnabled(false);
-                btnEndBuyRound.setEnabled(true);
+                game.runNpcRound();
+                setBuyRoundButtons();
             }
          });
          
      }
+     /**
+      * Gör knappar för buyRound synliga.
+      */
+     private void setBuyRoundButtons(){
+        this.landSelected1.setVisible(false);
+        this.landSelected2.setVisible(false);
+        this.landSelected3.setVisible(false);
+        this.landSelected4.setVisible(false);
+        this.btnEndBuyRound.setEnabled(true);
+            for(int i = 1; i < 5; i++){
+                ArrayList <Integer> temp = new ArrayList<>();
+                temp.add(game.getLandBelongsTo(i));
+                for(int u : temp){
+                    switch(u){
+                        case 1:
+                            this.addCav.setVisible(true);
+                            this.addMusk.setVisible(true);
+                            this.addPike.setVisible(true);
+                        break;
+                        case 2:
+                            this.addCav2.setVisible(true);
+                            this.addMusk2.setVisible(true);
+                            this.addPike2.setVisible(true);
+                        break;
+                        case 3:
+                            this.addCav3.setVisible(true);
+                            this.addMusk3.setVisible(true);
+                            this.addPike3.setVisible(true);
+                        break;
+                        case 4:
+                            this.addCav4.setVisible(true);
+                            this.addMusk4.setVisible(true);
+                            this.addPike4.setVisible(true);
+                        break;
+                        default:
+                            System.out.println(u);
+                        break;
+                        }
+                }
+               }
+     }
+     private void setAttackRoundButtons(){
+         this.addCav.setVisible(false);
+         this.addMusk.setVisible(false);
+         this.addPike.setVisible(false);
+         this.addCav2.setVisible(false);
+         this.addMusk2.setVisible(false);
+         this.addPike2.setVisible(false);
+         this.addCav3.setVisible(false);
+         this.addMusk3.setVisible(false);   
+         this.addPike3.setVisible(false);
+         this.addCav4.setVisible(false);
+         this.addMusk4.setVisible(false);
+         this.addPike4.setVisible(false);
+         for(int i = 1; i < 5; i++){
+                ArrayList <Integer> temp = new ArrayList<>();
+                temp.add(game.getLandBelongsTo(i));
+                for(int u : temp){
+                    switch(u){
+                        case 1:
+                            this.landSelected1.setVisible(true);
+                        break;
+                        case 2:
+                            this.landSelected2.setVisible(true);
+                        break;
+                        case 3:
+                            this.landSelected3.setVisible(true);
+                        break;
+                        case 4:
+                            this.landSelected4.setVisible(true);
+                        break;
+                        default:
+                            System.out.println(u);
+                        break;
+                        }
+                }
+    
+         }
+     }
+     
      public static void main (String[]args){
         java.awt.EventQueue.invokeLater(new Runnable(){
             public void run(){
@@ -491,8 +586,5 @@ public class MainGUI extends JFrame{
             }
         });
      }
+     
 }
-
-
-
-
