@@ -5,14 +5,24 @@ public class Cavalry extends Unit implements Comparable{
     
     public Cavalry(){
         this.defense = 20;
-        this.strength = 15;
+        this.strength = 20;
     }
     
     
     
     @Override
-    public int compareTo(Comparable o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int compareTo(Unit other) {
+        final int EQUAL = 0;
+        final int GREATER = 1;
+        final int LESSER = -1;
+        
+        if(this.getStr() > other.getDef()){
+            return GREATER; 
+        }else if(this.getStr() < other.getDef()){
+            return LESSER;
+        }else{
+            return EQUAL;
+        } 
     }
 
     @Override
@@ -25,7 +35,7 @@ public class Cavalry extends Unit implements Comparable{
     }
     @Override
     public String toString(){
-        return "Cavalry: ";
+        return "Cavalry ";
     }
 
     

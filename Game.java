@@ -1,14 +1,16 @@
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 
 public class Game{
-
+    
     private ArrayList <Unit> army1, army2, army3, army4;
-    private int playerBank;
+    private int playerBank, round, npcBank;
     private Boolean npcRules, playerRules;
     private Boolean land1BelongsTo,land2BelongsTo,land3BelongsTo,land4BelongsTo;
     private Boolean land1Selected, land2Selected, land3Selected, land4Selected;
@@ -26,14 +28,31 @@ public class Game{
         this.land4Selected = false;
         this.playerRules = false;
         this.npcRules = false;
-       
+        this.round = 1;
+        this.npcBank = 1000;
         this.playerBank = 1000;
         this.army1 = new ArrayList<>();
         this.army2 = new ArrayList<>();
         this.army3 = new ArrayList<>();
         this.army4 = new ArrayList<>();
     }
-    public int getArmy(int i){
+    public boolean doesPlayerRule(){
+        if(land1BelongsTo && land2BelongsTo && land3BelongsTo &&land4BelongsTo){
+            playerRules = true;  
+        }else{
+            playerRules = false;
+        }
+        return playerRules;
+    }
+    public boolean doesNpcRule(){
+        if(!land1BelongsTo && !land2BelongsTo && !land3BelongsTo && !land4BelongsTo){
+            npcRules = true;  
+        }else{
+            npcRules = false;
+        }
+        return npcRules;
+    }
+    public int getArmySize(int i){
         int armyUnits = 0;
         switch(i){
             case 1:
@@ -51,10 +70,23 @@ public class Game{
         }
         return armyUnits;
     }
+    public ArrayList getArmy(int i){
+        switch(i){
+            default:
+                return this.army1;
+            case 2:
+                return this.army2;
+            case 3:
+                return this.army3;
+            case 4:
+                return this.army4;
+        }
+    }
     
     
     public void addMusketeer(int i){
-        if(hasMoney(150)){
+       
+        if(hasMoney(150, i)){
         Unit u = new Musketeer();        
             switch(i){
                 case 1:
@@ -71,23 +103,47 @@ public class Game{
                 break;
             } 
         }else{
-            String msg = "Insufficient founds! \n";
-            String founds = "You only have: " + playerBank;
-            JOptionPane.showMessageDialog(null, msg + founds);
+            System.out.println("för lite pengar");
         }
         
         
     }
-    private boolean hasMoney(int i){
+    private boolean hasMoney(int i, int owner){
+        switch(owner){
+            case 1:
+                owner = getLandBelongsTo(owner);
+            break;
+            case 2:
+                owner = getLandBelongsTo(owner);
+            break;
+            case 3:
+                owner = getLandBelongsTo(owner);
+            break;
+            case 4:
+                owner = getLandBelongsTo(owner);
+            break;
+        }
+        if(owner > 0){
         if(playerBank - i >= 0){
             playerBank = playerBank - i;
             return true;
         }else{
+            String msg = "Insufficient founds! \n";
+            String founds = "You only have: " + playerBank + "c";
+            JOptionPane.showMessageDialog(null, msg + founds);
             return false;
+        }
+        }else{
+            if(npcBank - i >= 0){
+            npcBank = npcBank - i;
+            return true;
+        }else{
+            return false;
+        }
         }
     }
     public void addCavalry(int i){
-        if(hasMoney(200)){
+        if(hasMoney(200, i)){
         Unit u = new Cavalry();
             switch(i){
                 case 1:
@@ -104,15 +160,12 @@ public class Game{
                 break;
             }
         }else{
-            String msg = "Insufficient founds! \n";
-            String founds = "You only have: " + playerBank;
-            JOptionPane.showMessageDialog(null, msg + founds);
-        }
-        
-        
+            System.out.println("för lite pengar");
+        }              
     }
+    
     public void addPikeman(int i){
-        if(hasMoney(100)){
+        if(hasMoney(100, i)){
             Unit u = new Pikeman();
             switch(i){
                 case 1:
@@ -129,29 +182,25 @@ public class Game{
                 break;
             }
         }else{
-            String msg = "Insufficient founds! \n";
-            String founds = "You only have: " + playerBank;
-            JOptionPane.showMessageDialog(null, msg + founds);
+            System.out.println("för lite pengar");
         }
+    }   
+    public int getRound(){
+        return round;
     }
-    private void addMoney(){
-        for(int i = 0; i > 4; i++){
-            //if(getLandBelongsTo(i)){
-              //  playerBank += 300;
-            //}
-        }
-    }
-
     public void runNpcRound(){
-        
+        if(this.round == 1){
+            
+        }else{
+            
+        }
+        this.round++;
     }
     private boolean isWorldConquered(){
         if(playerRules || npcRules){
         return false;
         }else return true;
     }
-
-    
     public void selectLand(int i){
         switch(i){
             case 1: 
@@ -215,30 +264,45 @@ public class Game{
                 if(land1BelongsTo){
                     return i;
                 }else{
-                    return 0;
+                    return -i;
                 }
             case 2:
                 if(land2BelongsTo){
                     return i;
                 }else{
-                    return 0;
+                    return -i;
                 }
             case 3:
                 if(land3BelongsTo){
                     return i;
                 }else{
-                    return 0;
+                    return -i;
                 }
             default:
                 if(land4BelongsTo){
                     return i;
                 }else{
-                    return 0;
+                    return -i;
                 }
         }       
     }
-    public void attack(int i){
-        
+    public void attack(int i, JTextArea txaFight){
+        ArrayList <Unit> attackingArmy = new ArrayList<>();
+        ArrayList <Unit> defendingArmy = new ArrayList<>();
+        attackingArmy = this.getArmy(getSelectedLand());
+        defendingArmy = this.getArmy(i);
+        Random die = new Random();
+        int leastAmoutOfUnits = compareArmySize(attackingArmy, defendingArmy);
+        if(!attackingArmy.isEmpty() && !defendingArmy.isEmpty()){
+            
+        }
+    }
+    private int compareArmySize(ArrayList attackingArmy, ArrayList defendingArmy){
+        if(attackingArmy.size() < defendingArmy.size()){
+            return attackingArmy.size();
+        }else{
+            return defendingArmy.size();
+        }
     }
     public Color colorLand(){
         Color c = Color.WHITE;
@@ -249,8 +313,7 @@ public class Game{
                     switch(u){
                         case 0:
                             c = Color.CYAN;
-                        break;
-                        
+                        break;     
                         default:
                             c = Color.WHITE;
                         break;
@@ -281,31 +344,39 @@ public class Game{
     public Boolean isLand1Selected() {
         return land1Selected;
     }
-
     public Boolean isLand2Selected() {
         return land2Selected;
     }
-
     public Boolean isLand3Selected() {
         return land3Selected;
     }
-
     public Boolean isLand4Selected() {
         return land4Selected;
     }
     public int getPlayerBank() {
         return playerBank;
     }
+    private int getSelectedLand(){
+        if(land1Selected){
+            return 1;
+        }else if(land2Selected){
+            return 2;
+        }else if(land3Selected){
+            return 3;
+        }else if(land4Selected){
+            return 4;
+        }else{
+            String msg = "No land selected \n";
+            String msg2 = "Please select a land and try agian!";
+            JOptionPane.showMessageDialog(null, msg + msg2);
+            return 0;
+        }
+    }
  
 
-    public Boolean doesNpcRule() {
-        
-        return npcRules;
-    }
+    
 
-    public Boolean doesPlayerRule() {
-        return playerRules;
-    }
+    
 
     
     

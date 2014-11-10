@@ -214,10 +214,7 @@ public class MainGUI extends JFrame{
          this.landSelected3.setVisible(false);
          this.landSelected4.setVisible(false);
          
-     }
-     
-             
-     
+     }                       
      private void initMenuGUI(){
          /*
             Skapar menyn
@@ -229,15 +226,14 @@ public class MainGUI extends JFrame{
          this.terminate = new JMenuItem("Avsluta programmet");
          this.aboutItem = new JMenuItem("Om..");
          this.aboutProg = new JMenuItem("Om programmet");
-         
+        
          this.setJMenuBar(menu);
          this.menu.add(archive);
          this.menu.add(about);
          this.archive.add(startNew);
          this.archive.add(terminate);
          this.about.add(aboutItem);
-         this.about.add(aboutProg);
-         
+         this.about.add(aboutProg);         
          /*
             Inställningar för klickevent i menyerna
           */
@@ -259,8 +255,7 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game = new Game();
-                setBuyRoundButtons();
-                
+                setBuyRoundButtons();             
             }
          });
          
@@ -273,8 +268,7 @@ public class MainGUI extends JFrame{
             }
          });
      
-     }
-     
+     }     
      private void initButtonGUI(){
           /*
           * Actionevent för knappar (Cavalry)
@@ -282,10 +276,8 @@ public class MainGUI extends JFrame{
          this.addCav.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.addCavalry(1);
-                game.getArmy(1);
-                
-                txfNbrOfUnit.setText(Integer.toString(game.getArmy(1)));
+                game.addCavalry(1);               
+                txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
@@ -293,8 +285,7 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.addCavalry(2);
-                game.getArmy(2);
-                txfNbrOfUnit2.setText(Integer.toString(game.getArmy(2)));
+                txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
@@ -302,8 +293,7 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.addCavalry(3);
-                game.getArmy(3);
-                txfNbrOfUnit3.setText(Integer.toString(game.getArmy(3)));
+                txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
@@ -311,8 +301,7 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.addCavalry(4);
-                game.getArmy(4);
-                txfNbrOfUnit4.setText(Integer.toString(game.getArmy(4)));
+                txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
@@ -323,8 +312,8 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.addMusketeer(1);
-                game.getArmy(1);
-                txfNbrOfUnit.setText(Integer.toString(game.getArmy(1)));
+                game.getArmySize(1);
+                txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
@@ -332,26 +321,23 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.addMusketeer(2);
-                game.getArmy(2);
-                txfNbrOfUnit2.setText(Integer.toString(game.getArmy(2)));
+                txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addMusk3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.addMusketeer(3);
-                game.getArmy(3);
-                txfNbrOfUnit3.setText(Integer.toString(game.getArmy(3)));
+                game.addMusketeer(3);               
+                txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addMusk4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.addMusketeer(4);
-                game.getArmy(4);
-                txfNbrOfUnit4.setText(Integer.toString(game.getArmy(4)));
+                game.addMusketeer(4);               
+                txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
@@ -362,8 +348,7 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.addPikeman(1);
-                game.getArmy(1);
-                txfNbrOfUnit.setText(Integer.toString(game.getArmy(1)));
+                txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
@@ -371,17 +356,15 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.addPikeman(2);
-                game.getArmy(2);
-                txfNbrOfUnit2.setText(Integer.toString(game.getArmy(2)));
+                txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
          this.addPike3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.addPikeman(3);
-                game.getArmy(3);
-                txfNbrOfUnit3.setText(Integer.toString(game.getArmy(3)));
+                game.addPikeman(3);              
+                txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
@@ -389,8 +372,7 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.addPikeman(4);
-                game.getArmy(4);
-                txfNbrOfUnit4.setText(Integer.toString(game.getArmy(4)));
+                txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
             }
          });
@@ -399,8 +381,7 @@ public class MainGUI extends JFrame{
          */
          this.landSelected1.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e){
-                
+            public void actionPerformed(ActionEvent e){                
                 game.selectLand(1);
                 if(landSelected1.getText().equals("Use")){
                     landSelected1.setText("Selected");
@@ -411,6 +392,7 @@ public class MainGUI extends JFrame{
                 landSelected2.setText("Use");
                 landSelected3.setText("Use");
                 landSelected4.setText("Use");
+                popupAttackButtons();               
             }
          });
          this.landSelected2.addActionListener(new ActionListener(){
@@ -425,6 +407,7 @@ public class MainGUI extends JFrame{
                 landSelected1.setText("Use");
                 landSelected3.setText("Use");
                 landSelected4.setText("Use");
+                popupAttackButtons();
             }
          });
          this.landSelected3.addActionListener(new ActionListener(){
@@ -440,6 +423,7 @@ public class MainGUI extends JFrame{
                 landSelected2.setText("Use");
                 landSelected1.setText("Use");
                 landSelected4.setText("Use");
+                popupAttackButtons();
             }
          });
          this.landSelected4.addActionListener(new ActionListener(){
@@ -453,41 +437,49 @@ public class MainGUI extends JFrame{
                 }
                 landSelected2.setText("Use");
                 landSelected3.setText("Use");
-                landSelected1.setText("Use");               
+                landSelected1.setText("Use"); 
+                popupAttackButtons();
             }
          }); 
          this.attack1.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.attack(1);
+                game.attack(1, txaFight);
             }
          });
          this.attack2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.attack(2);
+                game.attack(2, txaFight);
             }
          });
          this.attack3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.attack(3);
+                game.attack(3, txaFight);
             }
          });
          this.attack4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.attack(4);
+                game.attack(4, txaFight);
             }
          });
          this.btnEndBuyRound.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                
                 btnEndBuyRound.setEnabled(false);
-                btnEndAttackRound.setEnabled(true);
-                setAttackRoundButtons();
-                
-                
+                if(game.getRound() == 1){
+                    String msg = "You can't attack in the first round\n";
+                    String msg2 = "Please wait until next round";
+                    JOptionPane.showMessageDialog(null, msg + msg2);
+                    game.runNpcRound();
+                    setBuyRoundButtons();
+                }else{
+                    btnEndAttackRound.setEnabled(true);
+                    setAttackRoundButtons();
+                }                                               
             }
          });
          this.btnEndAttackRound.addActionListener(new ActionListener(){
@@ -496,8 +488,7 @@ public class MainGUI extends JFrame{
                 game.runNpcRound();
                 setBuyRoundButtons();
             }
-         });
-         
+         });         
      }
      /**
       * Gör knappar för buyRound synliga.
@@ -540,6 +531,9 @@ public class MainGUI extends JFrame{
                 }
                }
      }
+     /**
+      * Gör knappar för Attack Round synliga.
+      */
      private void setAttackRoundButtons(){
          this.addCav.setVisible(false);
          this.addMusk.setVisible(false);
@@ -574,8 +568,39 @@ public class MainGUI extends JFrame{
                             System.out.println(u);
                         break;
                         }
+                }   
+         }
+     }
+     /**
+      * 
+      *  
+      */
+     private void popupAttackButtons(){
+         if(game.isLand1Selected() || game.isLand2Selected() ||
+            game.isLand3Selected() || game.isLand4Selected()){
+            for(int i = 1; i < 5; i++){
+                ArrayList <Integer> temp = new ArrayList<>();
+                temp.add(game.getLandBelongsTo(i));
+                for(int u : temp){
+                    switch(u){                     
+                        case -1:
+                            this.attack1.setVisible(true);
+                        break;
+                        case -2:
+                            this.attack2.setVisible(true);
+                        break;
+                        case -3:
+                            this.attack3.setVisible(true);
+                        break;
+                        case -4:
+                            this.attack4.setVisible(true);
+                        break;
+                        default:
+                            System.out.println(u);
+                        break;
+                        }
                 }
-    
+            }
          }
      }
      

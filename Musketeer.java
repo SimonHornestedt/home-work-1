@@ -4,13 +4,23 @@ public class Musketeer extends Unit implements Comparable{
     
     
     public Musketeer(){
-        this.strength = 50;
-        this.defense = 5;
+        this.strength = 40;
+        this.defense = 10;
     }
 
     @Override
-    public int compareTo(Comparable o) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public int compareTo(Unit other) {
+        final int EQUAL = 0;
+        final int GREATER = 1;
+        final int LESSER = -1;
+        
+        if(this.getStr() > other.getDef()){
+            return GREATER; 
+        }else if(this.getStr() < other.getDef()){
+            return LESSER;
+        }else{
+            return EQUAL;
+        } 
     }
 
     @Override
@@ -23,7 +33,7 @@ public class Musketeer extends Unit implements Comparable{
     }
     @Override
     public String toString(){
-        return "Musketeer: ";
+        return "Musketeer ";
     }
 
    

@@ -2,7 +2,7 @@ public abstract class Unit{
     
     
     Unit(){
-       
+       nbrOfUnits++;
     }
     public static int nbrOfUnits;
     
