@@ -13,9 +13,7 @@ public class MainGUI extends JFrame{
          this.initFrameGUI();
          this.initMenuGUI();
          this.initButtonGUI();
-         this.game = new Game();
-         
-         
+         this.game = new Game();   
    }
      private Border border;
      private Game game;
@@ -24,9 +22,11 @@ public class MainGUI extends JFrame{
      private JLabel lblPlayerBank, lblNbrOfUnits, cavPrice, muskPrice, pikePrice; 
      private JTextField txfPlayerBank, txfNbrOfUnit, txfNbrOfUnit2,
              txfNbrOfUnit3, txfNbrOfUnit4;
+     private JScrollPane scroll;
      private JMenuBar menu;
      private JMenu archive, about;
      private JMenuItem terminate, aboutItem, aboutProg, startNew;
+     private JButton test;
      private JButton landSelected1, landSelected2, landSelected3, landSelected4;
      private JButton attack1, attack2, attack3, attack4;
      private JButton addMusk, addMusk2, addMusk3, addMusk4;
@@ -42,7 +42,7 @@ public class MainGUI extends JFrame{
          */
          this.dimFrame = new Dimension(1400,500);
          this.dimTxf = new Dimension(60, 30);
-         this.dimTxa = new Dimension(400, 100);
+         this.dimTxa = new Dimension(400, 150);
          this.border = BorderFactory.createLineBorder(Color.BLACK);
          /*
             Inställningar för JFrame
@@ -63,7 +63,10 @@ public class MainGUI extends JFrame{
          this.cavPrice = new JLabel("Cavalry: 200c");
          this.muskPrice = new JLabel("Musketeer: 150c");
          this.pikePrice = new JLabel("Pikeman: 100c ");
-         this.txaFight = new JTextArea();
+         this.test = new JButton("Test");
+         this.txaFight = new JTextArea(8,40);
+         this.scroll = new JScrollPane(txaFight);
+         
          
        
          this.add(land1);
@@ -127,19 +130,24 @@ public class MainGUI extends JFrame{
          * stat-panel
          */
          this.lblPlayerBank = new JLabel("Player bank:");
-         
          this.txfPlayerBank = new JTextField("");
          this.txfPlayerBank.setPreferredSize(dimTxf);
          this.txfPlayerBank.setEditable(false);
          this.statPnl.add(lblPlayerBank);
          this.statPnl.add(txfPlayerBank);
-         this.statPnl.add(txaFight);
-         this.txaFight.setPreferredSize(dimTxa);
+         //this.statPnl.add(txaFight);
+         
+         this.statPnl.add(scroll);
+         this.scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+         //this.txaFight.setPreferredSize(dimTxa);
          this.txaFight.setEditable(false);
          this.txaFight.setBorder(border);
          this.statPnl.add(cavPrice);
          this.statPnl.add(muskPrice);
          this.statPnl.add(pikePrice);
+         
+         
+
          
          
          
@@ -188,6 +196,7 @@ public class MainGUI extends JFrame{
          this.btnEndAttackRound.setEnabled(false);
          this.optPnl.add(btnEndBuyRound);
          this.optPnl.add(btnEndAttackRound);
+         this.optPnl.add(test);
          
          
          
@@ -270,6 +279,12 @@ public class MainGUI extends JFrame{
      
      }     
      private void initButtonGUI(){
+         this.test.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                game.testButton();
+            }
+         });
           /*
           * Actionevent för knappar (Cavalry)
           */
@@ -445,24 +460,87 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game.attack(1, txaFight);
+                switch(game.getSelectedLand()){
+                    case 1:
+                        txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
+                    break;
+                    case 2:
+                        txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
+                    break;
+                    case 3:
+                        txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
+                    break;
+                    case 4:
+                        txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
+                    break;
+                }
+                txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
+                land1.setBackground(game.colorLands());
             }
          });
          this.attack2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.attack(2, txaFight);
+                game.attack(2, txaFight);switch(game.getSelectedLand()){
+                    case 1:
+                        txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
+                    break;
+                    case 2:
+                        txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
+                    break;
+                    case 3:
+                        txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
+                    break;
+                    case 4:
+                        txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
+                    break;
+                }
+                txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
+                land2.setBackground(game.colorLands());
             }
          });
          this.attack3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 game.attack(3, txaFight);
+                switch(game.getSelectedLand()){
+                    case 1:
+                        txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
+                    break;
+                    case 2:
+                        txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
+                    break;
+                    case 3:
+                        txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
+                    break;
+                    case 4:
+                        txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
+                    break;
+                }
+                txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
+                land3.setBackground(game.colorLands());
             }
          });
          this.attack4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 game.attack(4, txaFight);
+                switch(game.getSelectedLand()){
+                    case 1:
+                        txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
+                    break;
+                    case 2:
+                        txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
+                    break;
+                    case 3:
+                        txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
+                    break;
+                    case 4:
+                        txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
+                    break;
+                }
+                txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
+                land4.setBackground(game.colorLands());
             }
          });
          this.btnEndBuyRound.addActionListener(new ActionListener(){
@@ -471,11 +549,13 @@ public class MainGUI extends JFrame{
                 
                 btnEndBuyRound.setEnabled(false);
                 if(game.getRound() == 1){
-                    String msg = "You can't attack in the first round\n";
+                    String msg = "You can't attack during the first round\n";
                     String msg2 = "Please wait until next round";
                     JOptionPane.showMessageDialog(null, msg + msg2);
                     game.runNpcRound();
                     setBuyRoundButtons();
+                    txaFight.append("**** Round "+Integer.toString(game.getRound())
+                        + " **** \n" );
                 }else{
                     btnEndAttackRound.setEnabled(true);
                     setAttackRoundButtons();
@@ -487,6 +567,8 @@ public class MainGUI extends JFrame{
             public void actionPerformed(ActionEvent e){
                 game.runNpcRound();
                 setBuyRoundButtons();
+                txaFight.append("**** Round "+Integer.toString(game.getRound())
+                        + " ****" );
             }
          });         
      }
@@ -494,6 +576,7 @@ public class MainGUI extends JFrame{
       * Gör knappar för buyRound synliga.
       */
      private void setBuyRoundButtons(){
+        this.btnEndAttackRound.setEnabled(false);
         this.landSelected1.setVisible(false);
         this.landSelected2.setVisible(false);
         this.landSelected3.setVisible(false);

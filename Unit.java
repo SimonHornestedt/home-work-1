@@ -1,4 +1,4 @@
-public abstract class Unit{
+public abstract class Unit implements Comparable{
     
     
     Unit(){
@@ -8,6 +8,7 @@ public abstract class Unit{
     
     public abstract int getStr();
     public abstract int getDef();
+    
     
     @Override
     public abstract String toString();

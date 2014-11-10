@@ -82,8 +82,6 @@ public class Game{
                 return this.army4;
         }
     }
-    
-    
     public void addMusketeer(int i){
        
         if(hasMoney(150, i)){
@@ -190,14 +188,17 @@ public class Game{
     }
     public void runNpcRound(){
         if(this.round == 1){
-            
+            Unit u = new Pikeman();
+            army3.add(u);
+            army3.add(u);
+            army3.add(u);
         }else{
             
         }
         this.round++;
     }
     private boolean isWorldConquered(){
-        if(playerRules || npcRules){
+        if(doesPlayerRule() || doesNpcRule()){
         return false;
         }else return true;
     }
@@ -286,16 +287,61 @@ public class Game{
                 }
         }       
     }
+    public void testButton(){
+        while(!army1.isEmpty()){
+            System.out.println(army1.get(0).toString());
+            army1.remove(0);
+        }
+    }
     public void attack(int i, JTextArea txaFight){
         ArrayList <Unit> attackingArmy = new ArrayList<>();
         ArrayList <Unit> defendingArmy = new ArrayList<>();
         attackingArmy = this.getArmy(getSelectedLand());
         defendingArmy = this.getArmy(i);
         Random die = new Random();
-        int leastAmoutOfUnits = compareArmySize(attackingArmy, defendingArmy);
-        if(!attackingArmy.isEmpty() && !defendingArmy.isEmpty()){
+        String s = new String();
+        while(!attackingArmy.isEmpty() && !defendingArmy.isEmpty()){
             
+            Unit attackUnit = attackingArmy.get(0);
+            Unit defendUnit = defendingArmy.get(0);
+            int bonus = attackUnit.compareTo(defendUnit);
+            System.out.println(bonus);
+            int attackRoll = die.nextInt(5)+1;
+            int defendRoll = die.nextInt(5)+1;
+            attackRoll = attackRoll + bonus;
+            
+            txaFight.append("Attacking " +attackUnit.toString()+ "rolled " + 
+                    Integer.toString(attackRoll) +" against defending " + 
+                 defendUnit.toString() + " which rolled " + 
+                    Integer.toString(defendRoll) + "\n");
+            if(attackRoll > defendRoll){
+                defendingArmy.remove(0);
+               
+                txaFight.append(attackUnit.toString() +"killed " + 
+                        defendUnit.toString() + "\n");
+            }else if(attackRoll < defendRoll){
+                attackingArmy.remove(0);
+                
+                txaFight.append(defendUnit.toString() +"killed " + 
+                        attackUnit.toString() + "\n");
+            }else{
+
+                txaFight.append("Both units rolled " + Integer.toString(attackRoll)+ "Reroll!" + "\n");
+            }
+         
         }
+        if(defendingArmy.isEmpty()){
+            
+            txaFight.append("Attacker won and conquered the land");
+            setLandBelongsTo(true, i);
+        }else{
+            
+            txaFight.append("Defender won and kept the land");
+        }
+        
+    }
+    public void npcAttack(int i){
+        
     }
     private int compareArmySize(ArrayList attackingArmy, ArrayList defendingArmy){
         if(attackingArmy.size() < defendingArmy.size()){
@@ -304,7 +350,7 @@ public class Game{
             return defendingArmy.size();
         }
     }
-    public Color colorLand(){
+    public Color colorLands(){
         Color c = Color.WHITE;
         for(int i = 1; i< 5; i++){
             ArrayList <Integer> temp = new ArrayList<>();
@@ -356,7 +402,7 @@ public class Game{
     public int getPlayerBank() {
         return playerBank;
     }
-    private int getSelectedLand(){
+    public int getSelectedLand(){
         if(land1Selected){
             return 1;
         }else if(land2Selected){
@@ -372,13 +418,4 @@ public class Game{
             return 0;
         }
     }
- 
-
-    
-
-    
-
-    
-    
-    
 }
