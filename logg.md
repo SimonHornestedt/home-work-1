@@ -26,3 +26,6 @@ Uppdaterat till version 0.6.0. Inlämning kommer att vara 1.0.0
 Börjat skriva kod för att attackera motståndare. Färdigställt subklasser med compareTo metoder så att jag kan ta ut en bonus. 
 nästa gång: fixa så att attacker fungerar korrekt och så att man kan ta över ett land.
 
+- 2014.11.10 18.15
+Attack metod fixad och scrollpane tillagd. det går nu att ta över länder som spelare. 
+nästa programmera AI! (KUL, eller inte) 
