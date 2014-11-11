@@ -281,7 +281,7 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 String about = "Risk, inlämning 2014-11-14 \n";
-                String version = "Version: 0.6.0";
+                String version = "Version: 1.0.1";
                 JOptionPane.showMessageDialog(null, about + version);
             }
          });
