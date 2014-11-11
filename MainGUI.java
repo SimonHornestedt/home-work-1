@@ -196,7 +196,7 @@ public class MainGUI extends JFrame{
          this.btnEndAttackRound.setEnabled(false);
          this.optPnl.add(btnEndBuyRound);
          this.optPnl.add(btnEndAttackRound);
-         this.optPnl.add(test);
+         //this.optPnl.add(test);
          
          
          
@@ -264,7 +264,16 @@ public class MainGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 game = new Game();
-                setBuyRoundButtons();             
+                setBuyRoundButtons();
+                txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
+                txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
+                txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
+                txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                txaFight.append("**** Round "+Integer.toString(game.getRound())
+                        + " **** \n" );
+                game.reColorLands(land1,land2,land3, land4);
+                
             }
          });
          
@@ -279,11 +288,11 @@ public class MainGUI extends JFrame{
      
      }     
      private void initButtonGUI(){
-         this.test.addActionListener(new ActionListener(){
+        this.test.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e){
-                game.testButton();
-            }
+           public void actionPerformed(ActionEvent e){
+               game.testSort();
+           }
          });
           /*
           * Actionevent för knappar (Cavalry)
@@ -291,33 +300,49 @@ public class MainGUI extends JFrame{
          this.addCav.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(200, 1)){
                 game.addCavalry(1);               
                 txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          this.addCav2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(200, 2)){
                 game.addCavalry(2);
                 txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          this.addCav3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(200, 3)){
                 game.addCavalry(3);
                 txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          this.addCav4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(200, 4)){
                 game.addCavalry(4);
                 txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          /*
@@ -326,34 +351,50 @@ public class MainGUI extends JFrame{
          this.addMusk.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(150, 1)){
                 game.addMusketeer(1);
-                game.getArmySize(1);
+                
                 txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          this.addMusk2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(150, 2)){
                 game.addMusketeer(2);
                 txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          this.addMusk3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(150, 3)){
                 game.addMusketeer(3);               
                 txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          this.addMusk4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(150, 4)){
                 game.addMusketeer(4);               
                 txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          /*
@@ -362,33 +403,49 @@ public class MainGUI extends JFrame{
          this.addPike.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(100, 1)){
                 game.addPikeman(1);
                 txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          this.addPike2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(100, 2)){
                 game.addPikeman(2);
                 txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          this.addPike3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(100, 3)){
                 game.addPikeman(3);              
                 txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          this.addPike4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
+                if(game.hasMoney(100, 4)){
                 game.addPikeman(4);
                 txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }else{
+                    System.out.println("för lite pengar");
+                }   
             }
          });
          /*
@@ -459,7 +516,7 @@ public class MainGUI extends JFrame{
          this.attack1.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.attack(1, txaFight);
+                game.attack(1, txaFight, attack1);
                 switch(game.getSelectedLand()){
                     case 1:
                         txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
@@ -475,13 +532,14 @@ public class MainGUI extends JFrame{
                     break;
                 }
                 txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
-                land1.setBackground(game.colorLands());
+                game.reColorLands(land1,land2,land3, land4);
             }
          });
          this.attack2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.attack(2, txaFight);switch(game.getSelectedLand()){
+                game.attack(2, txaFight, attack2);
+                switch(game.getSelectedLand()){
                     case 1:
                         txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
                     break;
@@ -496,13 +554,13 @@ public class MainGUI extends JFrame{
                     break;
                 }
                 txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
-                land2.setBackground(game.colorLands());
+                game.reColorLands(land1,land2,land3, land4);
             }
          });
          this.attack3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.attack(3, txaFight);
+                game.attack(3, txaFight, attack3);
                 switch(game.getSelectedLand()){
                     case 1:
                         txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
@@ -518,13 +576,13 @@ public class MainGUI extends JFrame{
                     break;
                 }
                 txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
-                land3.setBackground(game.colorLands());
+                game.reColorLands(land1,land2,land3, land4);
             }
          });
          this.attack4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                game.attack(4, txaFight);
+                game.attack(4, txaFight, attack4);
                 switch(game.getSelectedLand()){
                     case 1:
                         txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
@@ -540,35 +598,88 @@ public class MainGUI extends JFrame{
                     break;
                 }
                 txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
-                land4.setBackground(game.colorLands());
+                game.reColorLands(land1,land2,land3, land4);
             }
          });
          this.btnEndBuyRound.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e){
-                
+            public void actionPerformed(ActionEvent e){               
                 btnEndBuyRound.setEnabled(false);
+                attack1.setVisible(false);
+                attack2.setVisible(false);
+                attack3.setVisible(false);
+                attack4.setVisible(false);
+                
                 if(game.getRound() == 1){
                     String msg = "You can't attack during the first round\n";
                     String msg2 = "Please wait until next round";
                     JOptionPane.showMessageDialog(null, msg + msg2);
-                    game.runNpcRound();
+                    game.runNpcRound(txaFight);
                     setBuyRoundButtons();
                     txaFight.append("**** Round "+Integer.toString(game.getRound())
-                        + " **** \n" );
+                        + " **** \n" );                   
                 }else{
                     btnEndAttackRound.setEnabled(true);
                     setAttackRoundButtons();
-                }                                               
+                }
+                txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
+                txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
+                txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
+                txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
+                game.reColorLands(land1,land2,land3, land4);
             }
          });
          this.btnEndAttackRound.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent e){
-                game.runNpcRound();
-                setBuyRoundButtons();
-                txaFight.append("**** Round "+Integer.toString(game.getRound())
-                        + " ****" );
+            public void actionPerformed(ActionEvent e){               
+                if(game.isWorldConquered()){
+                    txaFight.append("Spelet är slut!\n");
+                    if(game.doesPlayerRule()){
+                        txaFight.append("Spelaren har vunnit\n");
+                        btnEndAttackRound.setEnabled(false);
+                        btnEndBuyRound.setEnabled(false);
+                        addCav.setVisible(false);
+                        addMusk.setVisible(false);
+                        addPike.setVisible(false);
+                        addCav2.setVisible(false);
+                        addMusk2.setVisible(false);
+                        addPike2.setVisible(false);
+                        addCav3.setVisible(false);
+                        addMusk3.setVisible(false);   
+                        addPike3.setVisible(false);
+                        addCav4.setVisible(false);
+                        addMusk4.setVisible(false);
+                        addPike4.setVisible(false);        
+                        attack1.setVisible(false);
+                        attack2.setVisible(false);
+                        attack3.setVisible(false);
+                        attack4.setVisible(false);
+                        landSelected1.setVisible(false);
+                        landSelected2.setVisible(false);
+                        landSelected3.setVisible(false);
+                        landSelected4.setVisible(false);
+                        String msg = "The player has won\n";
+                        String msg2 = "To restart simply press > arkiv > nytt spel";
+                        JOptionPane.showMessageDialog(null, msg + msg2);
+                    }else{
+                        txaFight.append("Npc:n har vunnit\n");
+                        String msg = "The npc has won\n";
+                        String msg2 = "To restart simply press > arkiv > nytt spel";
+                        JOptionPane.showMessageDialog(null, msg + msg2);
+                    }
+                }else{
+                    game.runNpcRound(txaFight);
+                    setBuyRoundButtons();
+                    txaFight.append("**** Round "+Integer.toString(game.getRound())
+                        + " ****\n" );
+                    attack1.setVisible(false);
+                    attack2.setVisible(false);
+                    attack3.setVisible(false);
+                    attack4.setVisible(false);
+                    txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                }
+                game.reColorLands(land1,land2,land3, land4);
             }
          });         
      }
@@ -654,10 +765,7 @@ public class MainGUI extends JFrame{
                 }   
          }
      }
-     /**
-      * 
-      *  
-      */
+     
      private void popupAttackButtons(){
          if(game.isLand1Selected() || game.isLand2Selected() ||
             game.isLand3Selected() || game.isLand4Selected()){
@@ -685,8 +793,7 @@ public class MainGUI extends JFrame{
                 }
             }
          }
-     }
-     
+     }     
      public static void main (String[]args){
         java.awt.EventQueue.invokeLater(new Runnable(){
             public void run(){

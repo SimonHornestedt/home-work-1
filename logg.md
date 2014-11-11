@@ -29,3 +29,7 @@ nästa gång: fixa så att attacker fungerar korrekt och så att man kan ta över ett
 - 2014.11.10 18.15
 Attack metod fixad och scrollpane tillagd. det går nu att ta över länder som spelare. 
 nästa programmera AI! (KUL, eller inte) 
+
+- 2014.11.11 19.09
+AI programmerad. Den kan attackera ett land/runda och där nöjer jag mig! Buggfixat och klart jag hittar inget mer nu som behöver göras. 
+Nästa kommentera kod ordentligt med Javadoc och skapa UML diagram på lektion imorgon!
