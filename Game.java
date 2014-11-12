@@ -1,7 +1,7 @@
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.Random;
 import javax.swing.JButton;
 
@@ -104,29 +104,16 @@ public class Game{
             } 
         
     }
-    public boolean hasMoney(int i, int owner){       
-        switch(owner){
-            case 1:
-                owner = getLandBelongsTo(owner);
-            break;
-            case 2:
-                owner = getLandBelongsTo(owner);
-            break;
-            case 3:
-                owner = getLandBelongsTo(owner);
-            break;
-            case 4:
-                owner = getLandBelongsTo(owner);
-            break;
-        }
-        if(owner > 0){
+    public boolean hasMoney(int i,  boolean b){       
+        
+        if(b){
             if(playerBank - i >= 0){
             playerBank = playerBank - i;
             return true;
             }else{
-            String msg = "Insufficient founds! \n";
-            String founds = "You only have: " + playerBank + "c";
-            JOptionPane.showMessageDialog(null, msg + founds);
+            String msg = "Insufficient funds! \n";
+            String funds = "You only have: " + playerBank + "c";
+            JOptionPane.showMessageDialog(null, msg + funds);
             return false;
         }
         }else{
@@ -187,8 +174,8 @@ public class Game{
             int unit = r.nextInt(3)+1;
             int land = r.nextInt(2);
             int cash = 0;
-            //System.out.println("land" + land);
-            //System.out.println("unit"+ unit);
+            System.out.println("land" + land);
+            System.out.println("unit"+ unit);
             if(land == 0){
                 land = 3;
             }else if(land == 1){
@@ -204,8 +191,8 @@ public class Game{
                    cash = 100;
                 break;
             }
-            while(hasMoney(cash, land)){
-                //System.out.println("npc has " + npcBank +"c left");
+            while(hasMoney(cash, false)){
+                System.out.println("npc has " + npcBank +"c left");
                 switch(unit){
                     case 1:
                         addCavalry(land);
@@ -219,8 +206,8 @@ public class Game{
                 }
                 unit = r.nextInt(3)+1;
                 land = r.nextInt(2); 
-                //System.out.println("land" + land);
-                //System.out.println("unit"+ unit);
+                System.out.println("land" + land);
+                System.out.println("unit"+ unit);
                 if(land == 0){
                     land = 3;
                 }else if(land == 1){
@@ -242,15 +229,12 @@ public class Game{
         }else{
             Random r = new Random();
             int unit = r.nextInt(3)+1;
-            int land = r.nextInt(2);
+            int land = r.nextInt(4)+1;
             int cash = 0;
-            //System.out.println("land" + land);
-            //System.out.println("unit"+ unit);
-            if(land == 0){
-                land = 3;
-            }else if(land == 1){
-                land = 4;
-            }switch(unit){
+            System.out.println("land" + land);
+            System.out.println("unit"+ unit);
+            
+            switch(unit){
                 case 1:
                     cash = 200;
                 break;
@@ -261,8 +245,8 @@ public class Game{
                    cash = 100;
                 break;
             }
-            while(hasMoney(cash, land)){
-                //System.out.println("npc has " + npcBank +"c left");
+            while(hasMoney(cash, false)){
+                System.out.println("npc has " + npcBank +"c left");
                 switch(unit){
                     case 1:
                         addCavalry(land);
@@ -316,8 +300,8 @@ public class Game{
                     }
                 }
                 unit = r.nextInt(3)+1;
-                //System.out.println("land" + land);
-                //System.out.println("unit"+ unit);
+                System.out.println("land" + land);
+                System.out.println("unit"+ unit);
                 switch(unit){
                 case 1:
                     cash = 200;
@@ -353,7 +337,7 @@ public class Game{
             if(getLandBelongsTo(land) > 0){
                 playerLands++;
             }else{
-                //System.out.println("Player Land++");
+                System.out.println("Player Land++");
             }
         }
         return playerLands;
@@ -364,7 +348,7 @@ public class Game{
             if(getLandBelongsTo(land) < 0){
                 npcLands++;
             }else{
-                //System.out.println("npcland++");
+                System.out.println("npcland++");
             }
         }
         return npcLands;
@@ -695,15 +679,15 @@ public class Game{
         }
         return smallestLand;
     }    
-    public void testSort(){
-       ArrayList <Unit> attackingArmy = new ArrayList<>();
-       ArrayList <Unit> defendingArmy = new ArrayList<>();
-       attackingArmy = getBiggestNpcArmy();
-       //defendingArmy = getSmallestPlayerArmy();
-       
-       //System.out.println(attackingArmy.size());
-       //System.out.println(defendingArmy.size());
-    }   
+//    public void testSort(){
+//       ArrayList <Unit> attackingArmy = new ArrayList<>();
+//       ArrayList <Unit> defendingArmy = new ArrayList<>();
+//       attackingArmy = getBiggestNpcArmy();
+//       //defendingArmy = getSmallestPlayerArmy();
+//       
+//       System.out.println(attackingArmy.size());
+//       System.out.println(defendingArmy.size());
+//    }   
     public void addMoney(){
         addNpcMoney();
         addPlayerMoney();

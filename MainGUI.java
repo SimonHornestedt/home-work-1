@@ -288,19 +288,19 @@ public class MainGUI extends JFrame{
      
      }     
      private void initButtonGUI(){
-        this.test.addActionListener(new ActionListener(){
-            @Override
-           public void actionPerformed(ActionEvent e){
-               game.testSort();
-           }
-         });
+//        this.test.addActionListener(new ActionListener(){
+//            @Override
+//           public void actionPerformed(ActionEvent e){
+//               //game.testSort();
+//           }
+//         });
           /*
           * Actionevent för knappar (Cavalry)
           */
          this.addCav.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(200, 1)){
+                if(game.hasMoney(200, true )){
                 game.addCavalry(1);               
                 txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -312,7 +312,7 @@ public class MainGUI extends JFrame{
          this.addCav2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(200, 2)){
+                if(game.hasMoney(200,  true)){
                 game.addCavalry(2);
                 txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -324,7 +324,7 @@ public class MainGUI extends JFrame{
          this.addCav3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(200, 3)){
+                if(game.hasMoney(200,  true)){
                 game.addCavalry(3);
                 txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -336,7 +336,7 @@ public class MainGUI extends JFrame{
          this.addCav4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(200, 4)){
+                if(game.hasMoney(200, true)){
                 game.addCavalry(4);
                 txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -351,7 +351,7 @@ public class MainGUI extends JFrame{
          this.addMusk.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(150, 1)){
+                if(game.hasMoney(150, true)){
                 game.addMusketeer(1);
                 
                 txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
@@ -364,7 +364,7 @@ public class MainGUI extends JFrame{
          this.addMusk2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(150, 2)){
+                if(game.hasMoney(150, true )){
                 game.addMusketeer(2);
                 txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -376,7 +376,7 @@ public class MainGUI extends JFrame{
          this.addMusk3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(150, 3)){
+                if(game.hasMoney(150, true)){
                 game.addMusketeer(3);               
                 txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -388,7 +388,7 @@ public class MainGUI extends JFrame{
          this.addMusk4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(150, 4)){
+                if(game.hasMoney(150, true)){
                 game.addMusketeer(4);               
                 txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -403,7 +403,7 @@ public class MainGUI extends JFrame{
          this.addPike.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(100, 1)){
+                if(game.hasMoney(100, true)){
                 game.addPikeman(1);
                 txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -415,7 +415,7 @@ public class MainGUI extends JFrame{
          this.addPike2.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(100, 2)){
+                if(game.hasMoney(100, true)){
                 game.addPikeman(2);
                 txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -427,7 +427,7 @@ public class MainGUI extends JFrame{
          this.addPike3.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(100, 3)){
+                if(game.hasMoney(100, true)){
                 game.addPikeman(3);              
                 txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -439,7 +439,7 @@ public class MainGUI extends JFrame{
          this.addPike4.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(game.hasMoney(100, 4)){
+                if(game.hasMoney(100, true)){
                 game.addPikeman(4);
                 txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
                 txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
@@ -678,6 +678,10 @@ public class MainGUI extends JFrame{
                     attack3.setVisible(false);
                     attack4.setVisible(false);
                     txfPlayerBank.setText(Integer.toString(game.getPlayerBank()) + "c");
+                    txfNbrOfUnit.setText(Integer.toString(game.getArmySize(1)));
+                    txfNbrOfUnit2.setText(Integer.toString(game.getArmySize(2)));
+                    txfNbrOfUnit3.setText(Integer.toString(game.getArmySize(3)));
+                    txfNbrOfUnit4.setText(Integer.toString(game.getArmySize(4)));
                 }
                 game.reColorLands(land1,land2,land3, land4);
             }
