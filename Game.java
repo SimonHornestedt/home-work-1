@@ -18,8 +18,11 @@ public class Game{
     private Boolean land1BelongsTo,land2BelongsTo,land3BelongsTo,land4BelongsTo;
     private Boolean land1Selected, land2Selected, land3Selected, land4Selected;
 
-    
-    
+    /**
+     * Konstruktor till klassen Game,
+     * npcn är deklarerad som false genom hela programmet medans 
+     * spelaren är deklarerad som true. 
+     */
     public Game(){
         this.land1BelongsTo = true;
         this.land2BelongsTo = true;
@@ -39,6 +42,10 @@ public class Game{
         this.army3 = new ArrayList<>();
         this.army4 = new ArrayList<>();
     }
+    /**
+     * Metod för att kontrollera om spelaren äger alla länder.
+     * @return sant om spelaren äger alla länder
+     */
     public boolean doesPlayerRule(){
         if(land1BelongsTo && land2BelongsTo && land3BelongsTo && land4BelongsTo){
             playerRules = true;  
@@ -47,6 +54,10 @@ public class Game{
         }
         return playerRules;
     }
+    /**
+     * Metod för att kontrollera om npcn äger alla länder.
+     * @return sant om npcn äger alla länder
+     */
     public boolean doesNpcRule(){
         if(!land1BelongsTo && !land2BelongsTo && !land3BelongsTo && !land4BelongsTo){
             npcRules = true;  
@@ -55,6 +66,11 @@ public class Game{
         }
         return npcRules;
     }
+    /**
+     * Metod för att kontrollera hur stora armeerna är. 
+     * @param i är det land som skall hämtas 
+     * @return returnerar hur många enheter som finns i armén
+     */
     public int getArmySize(int i){
         int armyUnits = 0;
         switch(i){
@@ -73,7 +89,11 @@ public class Game{
         }
         return armyUnits;
     }
-    
+    /**
+     * Metod för att hämta arméer. 
+     * @param i är det land som skall hämtas 
+     * @return returnerar önskad armé
+     */
     public ArrayList getArmy(int i){
         switch(i){
             default:
@@ -86,6 +106,10 @@ public class Game{
                 return this.army4;
         }
     }
+    /**
+     * metod för att lägga till Musketörer
+     * @param i är det land där enheten skall läggas till
+     */
     public void addMusketeer(int i){
         Unit u = new Musketeer();        
             switch(i){
@@ -104,6 +128,12 @@ public class Game{
             } 
         
     }
+    /**
+     * Kontrollerar om det finns och drar pengar från banken 
+     * @param i är hur mycket pengar som skall dras.
+     * @param b är vem som ska kontrolleras. true = spelaren, false = npcn
+     * @return sant om det lyckades och false om det inte fanns pengar.
+     */
     public boolean hasMoney(int i,  boolean b){       
         
         if(b){
@@ -125,6 +155,10 @@ public class Game{
         }
         }
     }
+    /**
+     * metod för att lägga till Kavalerist
+     * @param i är det land där enheten skall läggas till
+     */
     public void addCavalry(int i){
         
         Unit u = new Cavalry();
@@ -145,7 +179,10 @@ public class Game{
                    
         }
     }
-    
+    /**
+     * metod för att lägga till pikeenare
+     * @param i är det land där enheten skall läggas till
+     */
     public void addPikeman(int i){
         
             Unit u = new Pikeman();
@@ -165,9 +202,17 @@ public class Game{
             
             }
     }   
+    /**
+     * 
+     * @return vilken runda det är  
+     */
     public int getRound(){
         return round;
     }
+    /**
+     * kör npcRunda.
+     * @param txaFight textArea där striden skrivs ut.
+     */
     public void runNpcRound(JTextArea txaFight){
         if(this.round == 1){
             Random r = new Random();
@@ -331,6 +376,11 @@ public class Game{
         addMoney();
         round++;       
     }
+    /**
+     * Metod för att kontrollera hur många länder som spelaren äger.
+     * 
+     * @return int antal spelarägda länder
+     */
     private int getNbrOfPlayerLands(){
         int playerLands = 0;
         for(int land = 1; land < 5; land++){
@@ -342,6 +392,10 @@ public class Game{
         }
         return playerLands;
     }
+    /**
+     * Metod för att kontrollera hur många länder som npcn äger.
+     * @return int antal npcägda länder
+     */
     private int getNbrOfNpcLands(){
         int npcLands = 0;
         for(int land = 1; land < 5; land++){
@@ -352,12 +406,19 @@ public class Game{
             }
         }
         return npcLands;
-    }
+    }/**
+     * Kontrollerar om någon har tagit över hela världen
+     * @return boolean om världen är övertagen
+     */
     public boolean isWorldConquered(){
         if(doesPlayerRule() || doesNpcRule()){
         return true;
         }else return false;
     }
+    /**
+     * Väljer land för attackrunda
+     * @param i int för valt land.
+     */
     public void selectLand(int i){
         switch(i){
             case 1: 
@@ -407,7 +468,7 @@ public class Game{
         }
     }
     /**
-     * 
+     * kontrollerar vem som äger landet
      * @param i = det land som skall kontrolleras
      * @return landets nummer om det är spelaren land
      */
@@ -441,6 +502,12 @@ public class Game{
                 return 0;                
         }       
     }    
+    /**
+     * Attackera valt land med spelar arme.
+     * @param i int flr vilket land som är används
+     * @param txaFight textArea där striden skrivs ut
+     * @param attackButton den klickade attackknappen
+     */
     public void attack(int i, JTextArea txaFight, JButton attackButton){
         ArrayList <Unit> attackingArmy = new ArrayList<>();
         ArrayList <Unit> defendingArmy = new ArrayList<>();
@@ -478,7 +545,10 @@ public class Game{
         }else{           
             txaFight.append("Defender won and kept the land\n");
         }        
-    }
+    }/**
+     * Attackerar med npc armé
+     * @param txaFight txa där striden skrivs ut 
+     */
     public void npcAttack(JTextArea txaFight){       
         ArrayList <Unit> attackingArmy = new ArrayList<>();
         ArrayList <Unit> defendingArmy = new ArrayList<>();
@@ -540,6 +610,10 @@ public class Game{
             txaFight.append("Defender won and kept the land\n");
         }
     }
+    /**
+     * Hämtar största npc armén
+     * @return arrayList för största npc armén
+     */
     private ArrayList getBiggestNpcArmy(){
         ArrayList <Integer> temp = new ArrayList<> ();
         for(int i = 1; i < 5; i++){
@@ -592,6 +666,10 @@ public class Game{
         }        
         return biggest;
     }
+    /**
+     * Hämtar minsta spelar Armé
+     * @return int för vilket land som har minst armé
+     */
     private int getSmallestPlayerArmy(){
         ArrayList <Integer> temp = new ArrayList<> ();
         
@@ -687,19 +765,35 @@ public class Game{
 //       
 //       System.out.println(attackingArmy.size());
 //       System.out.println(defendingArmy.size());
-//    }   
+//    } 
+    /**
+     * Lägger till pengar i banker.
+     */
     public void addMoney(){
         addNpcMoney();
         addPlayerMoney();
     }
+    /**
+     * lägger till npcpengar.
+     */
     public void addNpcMoney(){
         int nbrOfLands = getNbrOfNpcLands();
         npcBank = npcBank + 300*nbrOfLands;
     }
+    /**
+     * lägger till spelarpengar.
+     */
     public void addPlayerMoney(){
         int nbrOfLands = getNbrOfPlayerLands();
         playerBank = playerBank + 300*nbrOfLands;
     }    
+    /**
+     * färgar om länder efter en strid.
+     * @param land1 Jpanel för land 1
+     * @param land2 Jpanel för land 2
+     * @param land3 Jpanel för land 3
+     * @param land4 Jpanel för land 4
+     */
     public void reColorLands(JPanel land1,JPanel land2,JPanel land3,JPanel land4){
         ArrayList <Integer> temp = new ArrayList<> ();
         for(int i = 1; i < 5; i++){            

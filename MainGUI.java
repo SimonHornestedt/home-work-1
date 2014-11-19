@@ -294,6 +294,7 @@ public class MainGUI extends JFrame{
 //               //game.testSort();
 //           }
 //         });
+         
           /*
           * Actionevent för knappar (Cavalry)
           */
@@ -630,6 +631,7 @@ public class MainGUI extends JFrame{
                 game.reColorLands(land1,land2,land3, land4);
             }
          });
+         
          this.btnEndAttackRound.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){               
