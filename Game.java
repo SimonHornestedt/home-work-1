@@ -856,7 +856,12 @@ public class Game{
             break;
             }
         }
-    }    
+    }   
+    /**
+     * metod för att sätta ägare av ett land
+     * @param b boolean för ägaren av landet
+     * @param i int för vilket land som skall ändras.
+     */
     public void setLandBelongsTo(Boolean b, int i) {
         switch(i){
             case 1:
@@ -873,6 +878,11 @@ public class Game{
             break;                
         }
     }
+    /**
+     * metoder för att returnera om landet är valt. 
+     * @return boolean för om det ett land är valt 
+     */
+    
     public Boolean isLand1Selected() {
         return land1Selected;
     }
@@ -885,9 +895,17 @@ public class Game{
     public Boolean isLand4Selected() {
         return land4Selected;
     }
+    /**
+     * metod för att hämta spelarens bank
+     * @return int för spelarens bank
+     */
     public int getPlayerBank() {
         return playerBank;
     }
+    /**
+     * metod för att returnera det land som är valt. 
+     * @return int för vilket land som är valt
+     */
     public int getSelectedLand(){
         if(land1Selected){
             return 1;
