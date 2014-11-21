@@ -612,7 +612,7 @@ public class Game{
     }
     /**
      * Hämtar största npc armén
-     * @return arrayList för största npc armén
+     * @return ArrayList med största npc armén
      */
     private ArrayList getBiggestNpcArmy(){
         ArrayList <Integer> temp = new ArrayList<> ();
@@ -672,9 +672,7 @@ public class Game{
      */
     private int getSmallestPlayerArmy(){
         ArrayList <Integer> temp = new ArrayList<> ();
-        
         int smallestLand = 0;
-        
         for(int i = 1; i < 5; i++){
             
             int u = getLandBelongsTo(i);
@@ -767,7 +765,7 @@ public class Game{
 //       System.out.println(defendingArmy.size());
 //    } 
     /**
-     * Lägger till pengar i banker.
+     * Lägger till pengar i bankerna.
      */
     public void addMoney(){
         addNpcMoney();

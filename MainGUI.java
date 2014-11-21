@@ -15,6 +15,9 @@ public class MainGUI extends JFrame{
          this.initButtonGUI();
          this.game = new Game();   
    }
+   /*
+   medlemsvariabler till GUIt
+   */
      private Border border;
      private Game game;
      private Dimension dimFrame, dimTxf, dimTxa;
@@ -35,10 +38,12 @@ public class MainGUI extends JFrame{
      private JButton btnEndBuyRound, btnEndAttackRound;
      private JTextArea txaFight;
      
-     
+     /*
+      initialiserar spelbrädet och lägger till alla nödvändiga komponenter
+     */
      private void initFrameGUI(){
          /*
-            Standard storlekar i klassen
+            Standardstorlekar i klassen
          */
          this.dimFrame = new Dimension(1400,500);
          this.dimTxf = new Dimension(60, 30);
@@ -223,7 +228,10 @@ public class MainGUI extends JFrame{
          this.landSelected3.setVisible(false);
          this.landSelected4.setVisible(false);
          
-     }                       
+     }  
+     /*
+      initialiserar menyn
+     */
      private void initMenuGUI(){
          /*
             Skapar menyn
@@ -297,6 +305,7 @@ public class MainGUI extends JFrame{
          
           /*
           * Actionevent för knappar (Cavalry)
+          * lägger till kavaleri
           */
          this.addCav.addActionListener(new ActionListener(){
             @Override
@@ -348,6 +357,7 @@ public class MainGUI extends JFrame{
          });
          /*
           * Actionevent för knappar (Musketeer)
+         * lägger till musketör
           */
          this.addMusk.addActionListener(new ActionListener(){
             @Override
@@ -400,6 +410,7 @@ public class MainGUI extends JFrame{
          });
          /*
           * Actionevent för knappar (Pikeman)
+         * lägger till pikenare
           */
          this.addPike.addActionListener(new ActionListener(){
             @Override
@@ -631,7 +642,9 @@ public class MainGUI extends JFrame{
                 game.reColorLands(land1,land2,land3, land4);
             }
          });
-         
+         /*
+         * vslutar attackrundan.
+         */
          this.btnEndAttackRound.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){               
@@ -771,7 +784,9 @@ public class MainGUI extends JFrame{
                 }   
          }
      }
-     
+     /*
+     * poppar up attackknappar då man väljer ett land
+     */
      private void popupAttackButtons(){
          if(game.isLand1Selected() || game.isLand2Selected() ||
             game.isLand3Selected() || game.isLand4Selected()){

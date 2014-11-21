@@ -15,10 +15,10 @@ Nästa: Börja skriva kod för själva spelet så att det börjar gå att använda
 
 - 2014.11.08
 Skrivit klar det mesta av koden för GUI:t. Fixat alla knappar etc. 
-nästa gång. fixa bugg i runGame-loopen som gör så att spelet hänger sig. efter det börja jobba på spel makanismer etc. 
+Nästa gång. fixa bugg i runGame-loopen som gör så att spelet hänger sig. efter det börja jobba på spel makanismer etc. 
 
 - 2014.11.09 15.20
-Fixat buggen som hände spelet genom att radera den. Fixat de olika rundorna så att rätt knappar är framme och fixat så att man kan lägga till gubbar i armeerna ordentligt. 
+Fixat buggen som hände i runGame-loopen genom att radera den. Fixat de olika rundorna så att rätt knappar är framme och fixat så att man kan lägga till gubbar i armeerna ordentligt. 
 nästa gång: Fixa så att man kan attackera motståndare och sedan fixa till så att man kan vinna och ta över länder.
 Uppdaterat till version 0.6.0. Inlämning kommer att vara 1.0.0
 
@@ -33,3 +33,8 @@ nästa programmera AI! (KUL, eller inte)
 - 2014.11.11 19.09
 AI programmerad. Den kan attackera ett land/runda och där nöjer jag mig! Buggfixat och klart jag hittar inget mer nu som behöver göras. 
 Nästa kommentera kod ordentligt med Javadoc och skapa UML diagram på lektion imorgon!
+
+- 2014-11-21
+Kommenterad kod. UML gjord alla buggar borttagna utom en. då npcn försöker använda sig av spelarens pengar men misslyckas. 
+
+KLART FÖR INLÄMNING!
